@@ -1,0 +1,226 @@
+%YAML:1.0
+
+# Copyright (c) 2015 Siemens AG, Author: Andreas Weinlich
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+# Fast suggested configuration.
+# Hint: Use this config in combination with GOLOMB_CODING in include/vanilcDefinitions.h in order to achieve better compression speed or in combination with ARITHMETIC_CODING in order to achieve better compression ratio.
+
+# Attention: The parameters within this file are used to define algorithmic details. For most of them a change does not make sense. Doing so will probably result in a drop in compression performance or even a program crash, so be careful changing them.
+
+# -------------------- Files --------------------
+# Note for Linux: do not use the "~" sign as an abbreviation for your home directory.
+# Note for Windows: the "\" sign is an escape character, so separate your directories with "\\" instead.
+# Input image to be encoded or shown
+input: ""
+
+# Binary file where encoded bitstream is written to or from which bitstream for decoding is read}
+bitstream: ""
+
+# Output image to be written after decoding (use a lossless storage format!)
+output: ""
+
+# Image dimensions (size) for reading RAW 3-D images given in format BITDEPTHxWIDTHxHEIGHTxDEPTH, e.g., "8x512x512x10"}
+dimensions: ""
+
+# -------------------- Verbosity --------------------
+# Keycodes for Q and ESC key to close window.
+#keycode_q: 1048689
+#keycode_esc: 1048603
+keycode_q: 113
+keycode_esc: 27
+
+# Show image; if necessary first decode bitstream
+show: 0
+
+# Image is resized to fill the whole window (implies -s)
+resize: 0
+
+# Do not show any command line output
+quiet: 0
+
+# -------------------- Predictor Settings --------------------
+# For least-squares, choose between efficient "WLS" encoder (default), "LS" (without weighting), and faster "FASTLS" predictor.
+# Other predictors contain "NLM" (non-local means), "MED" (LOCO-I median predictor), and "MEAN" (average of neighborhood pixels) predictors.
+#predictor: "WLS"
+#predictor: "LS"
+#predictor: "FASTLS"
+predictor: "NLM"
+#predictor: "MED"
+#predictor: "MEAN"
+
+# Size of ellipse neighborhood: use 4px for NLM and 3px for MED.
+# 2 pixels (2x2)
+#neighborhood_top: 1.0
+#neighborhood_left: 1.0
+#neighborhood_right: 0.5
+# 3 pixels (2x2)
+#neighborhood_top: 1.5
+#neighborhood_left: 1.5
+#neighborhood_right: 0.5
+# 4 pixels (3x2)
+neighborhood_top: 1.5
+neighborhood_left: 1.5
+neighborhood_right: 1.5
+# 5 pixels (4x2)
+#neighborhood_top: 1.5
+#neighborhood_left: 1.5
+#neighborhood_right: 2.7
+# 6 pixels (4x3)
+#neighborhood_top: 2.0
+#neighborhood_left: 1.5
+#neighborhood_right: 2.5
+# 7 pixels (5x3)
+#neighborhood_top: 2.0
+#neighborhood_left: 2.0
+#neighborhood_right: 2.5
+# 8 pixels (5x3)
+#neighborhood_top: 2.2
+#neighborhood_left: 2.2
+#neighborhood_right: 2.5
+# 9 pixels (5x3)
+neighborhood_top: 2.15
+neighborhood_left: 2.5
+neighborhood_right: 2.95
+# 10 pixels (5x3)
+#neighborhood_top: 2.5
+#neighborhood_left: 2.5
+#neighborhood_right: 2.5
+# 11 pixels (6x3)
+#neighborhood_top: 2.2
+#neighborhood_left: 2.9
+#neighborhood_right: 3.5
+# 12 pixels (6x3)
+#neighborhood_top: 2.5
+#neighborhood_left: 2.9
+#neighborhood_right: 3.5
+# 13 pixels (7x3)
+#neighborhood_top: 2.5
+#neighborhood_left: 3.0
+#neighborhood_right: 3.5
+# 14 pixels (7x3)
+#neighborhood_top: 2.9
+#neighborhood_left: 3.0
+#neighborhood_right: 3.5
+# 15 pixels (7x4)
+#neighborhood_top: 3.0
+#neighborhood_left: 3.0
+#neighborhood_right: 3.5
+# 16 pixels (7x4)
+#neighborhood_top: 3.0
+#neighborhood_left: 3.2
+#neighborhood_right: 3.5
+# 17 pixels (8x4)
+#neighborhood_top: 3.0
+#neighborhood_left: 4.0
+#neighborhood_right: 3.5
+# 18 pixels (8x4)
+#neighborhood_top: 3.0
+#neighborhood_left: 4.0
+#neighborhood_right: 4.1
+# 19 pixels (9x4)
+#neighborhood_top: 3.0
+#neighborhood_left: 4.0
+#neighborhood_right: 4.3
+# 20 pixels (9x4)
+#neighborhood_top: 3.0
+#neighborhood_left: 4.1
+#neighborhood_right: 4.3
+# 35 pixels (9x5)
+#neighborhood_top: 4.5
+#neighborhood_left: 4.5
+#neighborhood_right: 4.5
+
+# Only for 3-D neighborhoods: size of neighborhood on bottom and in z-direction.
+# Attention: turn off 3-D neighborhoods for 2-D images (otherwise, e. g., FASTLS will fall back to LS).
+# only 2-D neighborhood
+neighborhood_bottom: 0.0
+neighborhood_front: 0.0
+# additional 3-D values
+#neighborhood_bottom: 2.5
+#neighborhood_front: 2.1
+
+# Size of training region (maximum pixel distance for values incorporated to training).
+training_size: 1
+#training_size: 7
+#training_size: 16
+#training_size: 300
+
+# For 3-D training region: configure number of slices to include for training: 0 := only 2-D training region.
+training_size_3D: 0
+#training_size_3D: 3
+
+# Estimation of pixel intensities variance: RESIDUAL (from prediction error context), EXPONENTIAL (fast, default), or LS (analytically with LS).
+variance: "RESIDUAL"
+#variance: "EXPONENTIAL"
+#variance: "LS"
+
+# For variance == RESIDUAL define size of context region from which to estimate.
+variance_radius: 4.5
+
+# Code transposed image if edges are rather horizontal.
+adaptive_transposition: 0
+
+# Defines the maximum pixel extent of an image in x-, y-, and z-direction: for best performance choose about eight times the typical image size.
+max_image_size: 8192
+
+# -------------------- Least-Squares Settings --------------------
+# For color images, include corresponding pixel positions in previously transmitted channels into the prediction neighborhood.
+inter_channel_prediction: 0
+
+# Equation to be used for variance prediction in WLS: 0 is equivalent to LS derivation, 1 uses squared weights (achieves better compression ratios)
+# Attention: When wls_variance_equation=0, weights are already 'squared' for LS prediction which might impair prediction results if variance=RESIDUAL!
+wls_variance_equation: 1
+
+# If larger than zero, use another neighborhood size (circle neighborhood) for matching to compute weights in WLS. This is useful if the image contains recurring structures.
+# Attention: This has only an effect if it is greater than neighborhood_XXX sizes!
+other_matching_neighborhood: 0.0
+#other_matching_neighborhood: 7.5
+
+# If larger than zero, allow no more than this number of weights to be larger than zero in WLS. This is useful for non-local training (large training_size).
+max_training_vectors: 0
+
+# Choose algorithm for solving linear system of equations: DECOMP_CHOLESKY (3) leads to faster solutions than DECOMP_QR (4) but sometimes decreases compression efficiency.
+solver: 3
+
+# Choose Tikhonov regularization strength for border and for inner image pixels (inner regularization is only possible if also border regularization is done).
+# This usually prevents ill-posed systems of equations such that the cholesky decomposition almost always finds a solution and therefore increases speed.
+# Especially for computer-generated images without noise one should think about using some non-zero inner_regularization value (e.g., 1.0), too.
+border_regularization: 1.0
+inner_regularization: 0.0
+
+# Buffer already computed neighborhoods: increases speed (especially for LS and WLS) but requires significantly more memory during execution (especially with large images).
+neighborhood_buffer: 1
+
+# -------------------- Entropy Coding --------------------
+# Make the distribution sparse, i. e., remove high probabilities for intensities that were observed not very often previously: recommended for non-natural images.
+sparsify_distribution: 0.0
+#sparsify_distribution: 0.5
+#sparsify_distribution: 20.0
+
+# When sparsify_distribution is used, define radius of context from whitch to estimate sparsity: larger contexts increase computational complexity.
+sparsification_size: 60.0
+
+# Use the more precise T-Distribution for better compression ratio like derived in the paper or a Laplace distribution which performs worse for least-squares.
+distribution: "NORMAL"
+#distribution: "T"
+#distribution: "LAPLACE"
+
+# Additive regularization distribution is necessary to prevent too low probabilities that could cause infinitely long code words if the symbol occurs (Laplace suggested).
+#regularization_distribution: "NORMAL"
+#regularization_distribution: "UNIFORM"
+regularization_distribution: "LAPLACE"
+
+# Upper bound for the number of bits one compressed pixel may occupy: necessary to prevent extremely large storage demands for improbable intensities.
+# Attention: Typically the mean bits per pixel performance will drop when defining this value too big or too small.
+# Attention: Do not use more than bits of (RANGETYPE - 2) or more than 50.
+max_bits_per_pixel: 30
+
+# Closely related to MAX_BITS_PER_PIXEL: defines the storage demand ratio between improbable intensities and most improbable intensities.
+max_to_min_regularization_ratio: 10000.0
+

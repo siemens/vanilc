@@ -21,7 +21,7 @@ Installation
 ------------
 1. If not already available, first install CMake [2].
 
-2. On Linux, install GCC (tested with version 4.7), as well as the standard development packages for C++. If you would like to show images, also install the development package for libgtk 2.0. On Windows 7, install Visual Studio 7.
+2. On Linux, install GCC (tested with version 4.7), as well as the standard development packages for C++. If you would like to show images, also install the development package for libgtk 2.0. On Windows 7, install Visual Studio 2010.
 
 3. If you would like to use the system-versions of OpenCV and Boost, first make sure that these are correctly installed on your system.
 
